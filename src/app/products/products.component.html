@@ -2,7 +2,11 @@
   <div class="columns" id="search">
     <h1>Products</h1>
     <p>
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        This is a simple Angular 4 app which lets you store a list of products and their descriptions, and also lets you delete each entry. 
+    </p>
+    <p>
+       Enter a product name, a product description below and watch it get stored in the list on the right. <br>
+       You can simply delete a product from the list by clicking on ' X ' 
     </p>
     
     <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
@@ -10,15 +14,22 @@
       type="text"
       name="title"
       placeholder="Product Name"
-      [(ngModel)]>
+      [(ngModel)]="title"
+      required>
 
       <textarea 
       name="description"
       rows="3"
       placeholder="Product Description"
-      [(ngModel)]></textarea>
+      [(ngModel)]="description"
+      required></textarea>
       
-      <button id="btn" type="submit"></button>
+      <button 
+      id="btn" 
+      type="submit"
+      [disabled]="productForm.invalid"
+      *ngIf="productForm.valid"
+      >Add Product</button>
     </form>
 
 
@@ -28,8 +39,8 @@
     <p id="results-label">{{ products.length }} Results</p>
 
     <ul id="products-list">
-      <li *ngFor="let product of products; let i = index">{{ product.title }}
-        <span (click)="removeProduct(i)">X</span>
+        <li [@productsAnim]="state" *ngFor="let product of products; let i = index">{{ product.title }}
+        <span class="closeSpan" (click)="removeProduct(i)">X</span>
         <p> {{ product.description }}</p>
       </li>
     </ul>

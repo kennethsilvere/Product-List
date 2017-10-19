@@ -54,3 +54,16 @@ ul li img {
     cursor:pointer;
     width:24px;
 }
+
+.closeSpan {
+    color: red;
+    float: right;
+}
+
+.closeSpan:hover {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
